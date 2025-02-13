@@ -2,6 +2,7 @@
 //another one is class component which become less usable now
 // import UBtn from "./UBtn";
 import Hello from "./Hello";
+import Random from "./Random";
 function App(){
   //JSX not HTML
   return<div> 
@@ -10,6 +11,7 @@ function App(){
             </h1>
             {/* <UBtn></UBtn> */}
             <Hello></Hello>
+            <Random></Random>
         </div>
   
 }
