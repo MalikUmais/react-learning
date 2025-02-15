@@ -1,5 +1,5 @@
 import Item from "./Item";
-const Items = ({iTem}) => {
+const Items = ({ iTem }) => {
   return (
     <ul className="list-group">
       {iTem.map((itEm) => (

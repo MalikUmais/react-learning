@@ -6,8 +6,8 @@ const Item = ({ items }) => {
   //   let { item } = props.items;
   //   return <li className="list-group-item">{props.items}</li>;
   return (
-    <li className={`${(styles["um-item"])} ${"list-group-item"}`}>
-      <span className={`${(styles["um-span"])}`}>{items}</span>
+    <li className={`${styles["um-item"]} ${"list-group-item"}`}>
+      <span className={`${styles["um-span"]}`}>{items}</span>
     </li>
   );
 };
