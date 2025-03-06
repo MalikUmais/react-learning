@@ -8,6 +8,8 @@ const Item = ({ items }) => {
   return (
     <li className={`${styles["um-item"]} ${"list-group-item"}`}>
       <span className={`${styles["um-span"]}`}>{items}</span>
+      <button className={`${styles.button} btn btn-info`
+      } onClick={()=>console.log(`${items} bought`)}>Buy</button>
     </li>
   );
 };

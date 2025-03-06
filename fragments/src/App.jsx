@@ -1,9 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Items from "./components/items";
 import Error from "./components/Error";
+import FoodInput from "./components/FoodInput";
 import "./App.css";
 //for using fragment
 import React from "react";
+import Container from "./components/Container";
 function App() {
   let items = [
     "A first item",
@@ -13,9 +15,15 @@ function App() {
   ];
   return (
     <>
-      <h1 className="item-heading">items</h1>
-      <Error iTem={items} />
-      <Items iTem={items} />
+      <Container>
+        <h1 className="item-heading">items</h1>
+        <FoodInput></FoodInput>
+        <Error iTem={items} />
+        <Items iTem={items} />
+      </Container>
+      {/* <Container>
+        <p>Above is the list of items i dont know about them</p>
+      </Container> */}
     </>
   );
 }
