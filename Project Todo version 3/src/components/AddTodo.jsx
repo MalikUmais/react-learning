@@ -1,34 +1,37 @@
-import { useState } from "react";
-
-function AddTodo({onNewItem}) {
-  const [todoName,setToDoName]=useState("");
-  const [DueDate,setDueDate]=useState("");
-  const handleNameChanage=(event)=>{
-    setToDoName(event.target.value);
-  }
-  const hndleDataChange=(event)=>{
-    setDueDate(event.target.value);
-  }
-  const handleAddButtonClicked=()=>{
-    onNewItem(todoName,DueDate);
-    setDueDate("");
-    setToDoName("");
-  }
+import { useRef } from "react";
+import { useContext } from "react";
+import TodoItemsContext from "./TodoItemsContext";
+function AddTodo() {
+  const { addNewItem } = useContext(TodoItemsContext);
+  const todoNameElement = useRef(0);
+  const dueDateElement = useRef(0);
+  const handleAddButtonClicked = (event) => {
+    event.preventDefault();
+    const todoName = todoNameElement.current.value;
+    const DueDate = dueDateElement.current.value;
+    todoNameElement.current.value = "";
+    dueDateElement.current.value = "";
+    addNewItem(todoName, DueDate);
+  };
   return (
     <div className="container ">
-      <div className="row um-row">
+      <form className="row um-row" onSubmit={handleAddButtonClicked}>
         <div className="col-6">
-          <input type="text" placeholder="Enter Todo Here" value={todoName} onChange={handleNameChanage}/>
+          <input
+            ref={todoNameElement}
+            type="text"
+            placeholder="Enter Todo Here"
+          />
         </div>
         <div className="col-4">
-          <input type="date" value={DueDate} onChange={hndleDataChange}/>
+          <input ref={dueDateElement} type="date" />
         </div>
         <div className="col-2 ">
-          <button type="button" className="btn btn-success um-btn " onClick={handleAddButtonClicked}>
+          <button type="submit" className="btn btn-success um-btn ">
             Add
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
