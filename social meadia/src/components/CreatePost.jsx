@@ -17,7 +17,7 @@ const CreatePost = () => {
     userIdElement.current.value="";
     postTitleElement.current.value="";
     postBodyElement.current.value="";
-    reactionsElement.current.value=0;
+    reactionsElement.current.value="";
     tagsElement.current.value="";
     addPost(userId,postTitle,postBody,reactions,tags);
   }
