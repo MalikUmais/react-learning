@@ -19,7 +19,25 @@ const CreatePost = () => {
     postBodyElement.current.value="";
     reactionsElement.current.value="";
     tagsElement.current.value="";
-    addPost(userId,postTitle,postBody,reactions,tags);
+
+    fetch('https://dummyjson.com/posts/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        // title: 'I am in love with someone.',
+        userId: userId,
+        title: postTitle,
+        body: postBody,
+        reactions: reactions,
+        userID: userId,
+        tags: tags,
+        /* other post data */
+      })
+    })
+    .then(res => res.json())
+    .then(post => addPost(post));
+
+    
   }
   return (
     <form className="create-post" onSubmit={handleSubmit}>

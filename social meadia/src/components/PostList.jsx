@@ -5,26 +5,8 @@ import WelcomeMessage from "./WelcomeMessage";
 import LoadingSpinner from "./LoadingSpinner";
 
 const PostList = () => {
-  const { postList, addInitialPosts } = useContext(PostListData);
-  const [fetching, setFetching] = useState(false);
-  useEffect(() => {
-    setFetching(true);
-    const controller=new AbortController();
-    const signal=controller.signal;
-    fetch("https://dummyjson.com/posts",{signal})
-      .then((res) => res.json())
-      .then((data) => {
-        const modifiedPosts = data.posts.map((post) => ({
-          ...post,
-          reactions: post.reactions.likes, // Extract only likes
-        }));
-        addInitialPosts(modifiedPosts);
-        setFetching(false);
-      });
-      return () => {
-        controller.abort();
-      }
-  }, []);
+  const { postList, fetching } = useContext(PostListData);
+  
 
   return (
     <>
