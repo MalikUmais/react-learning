@@ -61,6 +61,7 @@ const PostListProvider = ({ children }) => {
         addInitialPosts(modifiedPosts);
         setFetching(false);
       });
+      
       return () => {
         controller.abort();
       }
@@ -73,3 +74,4 @@ const PostListProvider = ({ children }) => {
 };
 
 export default PostListProvider;
+
