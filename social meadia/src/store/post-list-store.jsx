@@ -1,39 +1,41 @@
-import { useEffect } from "react";
-import { useCallback } from "react";
-import { createContext, useReducer,useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 
 export const PostList = createContext({
   postList: [],
   addPost: () => {},
   deletePost: () => {},
 });
-const PostListReducer = (currPostList, action) => {
+
+const postListReducer = (currPostList, action) => {
   let newPostList = currPostList;
   if (action.type === "DELETE_POST") {
     newPostList = currPostList.filter(
       (post) => post.id !== action.payload.postId
     );
-  }else if(action.type==="ADD_INITIAL_POSTS"){
-    newPostList=action.payload.posts;
-  }
-  else if(action.type==="ADD_POST"){
-    newPostList=[action.payload,...currPostList]
+  } else if (action.type === "ADD_INITIAL_POSTS") {
+    newPostList = action.payload.posts;
+  } else if (action.type === "ADD_POST") {
+    newPostList = [action.payload, ...currPostList];
   }
   return newPostList;
 };
+
 const PostListProvider = ({ children }) => {
-  const [postList, dispatchPostList] = useReducer(
-    PostListReducer,
-    []
-  );
-  
-  
+  const [postList, dispatchPostList] = useReducer(postListReducer, []);
+
   const addPost = (post) => {
     dispatchPostList({
       type: "ADD_POST",
-      payload:post,
-    })
+      payload: post,
+    });
   };
+
   const addInitialPosts = (posts) => {
     dispatchPostList({
       type: "ADD_INITIAL_POSTS",
@@ -42,11 +44,19 @@ const PostListProvider = ({ children }) => {
       },
     });
   };
-  const deletePost =useCallback ((postId) => {
-    dispatchPostList({ type: "DELETE_POST", payload: { postId } });
-  },[dispatchPostList]);
 
-  
+  const deletePost = useCallback(
+    (postId) => {
+      dispatchPostList({
+        type: "DELETE_POST",
+        payload: {
+          postId,
+        },
+      });
+    },
+    [dispatchPostList]
+  );
+
   return (
     <PostList.Provider value={{ postList, addPost, deletePost }}>
       {children}
@@ -55,4 +65,3 @@ const PostListProvider = ({ children }) => {
 };
 
 export default PostListProvider;
-
